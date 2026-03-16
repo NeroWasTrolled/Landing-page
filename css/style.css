@@ -1093,6 +1093,119 @@ img {
     transform: translateY(0);
 }
 
+/* Reduz custo de renderizacao em Android de menor desempenho mantendo a mesma direcao visual. */
+body.perf-android {
+    --shadow: 0 10px 22px rgba(4, 1, 10, 0.34);
+    --glow: 0 0 14px rgba(180, 118, 255, 0.2);
+}
+
+body.perf-android::before,
+body.perf-android::after,
+body.perf-android .page-shell::before {
+    filter: blur(6px);
+}
+
+body.perf-android .fx-particles {
+    opacity: 0.45;
+}
+
+body.perf-android .fx-particles span {
+    animation-duration: 20s;
+}
+
+body.perf-android .top-actions,
+body.perf-android .bio-card,
+body.perf-android .service-lab,
+body.perf-android .spotlight,
+body.perf-android .mini-footer,
+body.perf-android .link-card,
+body.perf-android .github-panel {
+    backdrop-filter: blur(3px);
+}
+
+body.perf-android .shape,
+body.perf-android .avatar,
+body.perf-android .theme-toggle,
+body.perf-android .mini-footer strong,
+body.perf-android .dot,
+body.perf-android .quote-cursor,
+body.perf-android .loader-brand img {
+    animation-duration: 8.5s;
+}
+
+body.perf-android .dot {
+    animation-duration: 2.4s;
+}
+
+body.perf-android .quote-cursor {
+    animation-duration: 1.15s;
+}
+
+body.perf-android.perf-l1 .fx-particles {
+    opacity: 0.5;
+}
+
+body.perf-android.perf-l2 {
+    --shadow: 0 8px 16px rgba(4, 1, 10, 0.3);
+    --glow: 0 0 10px rgba(180, 118, 255, 0.16);
+}
+
+body.perf-android.perf-l2::before,
+body.perf-android.perf-l2::after,
+body.perf-android.perf-l2 .page-shell::before {
+    filter: blur(4px);
+}
+
+body.perf-android.perf-l2 .fx-particles {
+    opacity: 0.34;
+}
+
+body.perf-android.perf-l2 .fx-particles span {
+    animation-duration: 26s;
+}
+
+body.perf-android.perf-l2 .top-actions,
+body.perf-android.perf-l2 .bio-card,
+body.perf-android.perf-l2 .service-lab,
+body.perf-android.perf-l2 .spotlight,
+body.perf-android.perf-l2 .mini-footer,
+body.perf-android.perf-l2 .link-card,
+body.perf-android.perf-l2 .github-panel {
+    backdrop-filter: blur(2px);
+}
+
+body.perf-android.perf-l2 .shape,
+body.perf-android.perf-l2 .avatar,
+body.perf-android.perf-l2 .theme-toggle,
+body.perf-android.perf-l2 .mini-footer strong,
+body.perf-android.perf-l2 .loader-brand img {
+    animation-duration: 10s;
+}
+
+body.perf-android.perf-l2 .dot {
+    animation-duration: 2.8s;
+}
+
+body.perf-android.perf-l2 .quote-cursor {
+    animation-duration: 1.25s;
+}
+
+body.perf-android .quote-animated.switching #quote-text {
+    filter: none;
+}
+
+body.perf-android .social-chip:hover,
+body.perf-android .metric-card:hover,
+body.perf-android .service-grid article:hover,
+body.perf-android .github-grid img:hover,
+body.perf-android .link-card:hover {
+    box-shadow: 0 8px 14px rgba(73, 33, 121, 0.14);
+}
+
+body.perf-android .link-card:hover h2 {
+    transform: translateX(1px);
+}
+
 @keyframes roseSpin {
     from {
         transform: rotate(0deg);

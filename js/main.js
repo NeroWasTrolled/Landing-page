@@ -22,6 +22,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const storedTheme = localStorage.getItem("bio-theme") || "dark";
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const coarsePointer = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+    const androidDevice = /Android/i.test(navigator.userAgent || "");
+    const deviceMemory = Number(navigator.deviceMemory || 4);
+    const logicalCores = Number(navigator.hardwareConcurrency || 4);
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const saveDataEnabled = Boolean(connection && connection.saveData);
+    const androidLowPerf = androidDevice && (saveDataEnabled || deviceMemory <= 4 || logicalCores <= 6);
+    let perfLevel = androidLowPerf ? 1 : 0;
+
+    const setPerfLevel = (level) => {
+        perfLevel = level;
+        document.body.classList.remove("perf-l1", "perf-l2");
+        if (level === 1) document.body.classList.add("perf-l1");
+        if (level >= 2) document.body.classList.add("perf-l2");
+    };
+
+    if (androidLowPerf) {
+        document.body.classList.add("perf-android");
+        setPerfLevel(1);
+    }
+
     document.body.setAttribute("data-theme", storedTheme);
     if (loadingScreen) loadingScreen.setAttribute("data-theme", storedTheme);
 
@@ -80,7 +100,11 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const preloadGithubCards = () => {
-        Object.values(githubUrlsByTheme).forEach((themeUrls) => {
+        const sources = perfLevel > 0
+            ? [githubUrlsByTheme[storedTheme] || githubUrlsByTheme.dark]
+            : Object.values(githubUrlsByTheme);
+
+        sources.forEach((themeUrls) => {
             [themeUrls.stats, themeUrls.langs].forEach((url) => {
                 const img = new Image();
                 img.src = url;
@@ -122,7 +146,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const createParticles = () => {
         if (!particlesLayer) return;
         particlesLayer.innerHTML = "";
-        for (let i = 0; i < 8; i += 1) {
+        const particleCount = perfLevel >= 2 ? 3 : (perfLevel === 1 ? 5 : 8);
+        for (let i = 0; i < particleCount; i += 1) {
             const particle = document.createElement("span");
             particle.style.left = `${Math.random() * 100}%`;
             particle.style.top = `${Math.random() * 100}%`;
@@ -141,7 +166,21 @@ document.addEventListener("DOMContentLoaded", () => {
     syncThemeButton(storedTheme);
     setGithubCardsTheme(storedTheme);
     preloadGithubCards();
-    loadGithubMetrics();
+    if (perfLevel >= 2 && "requestIdleCallback" in window) {
+        window.requestIdleCallback(() => {
+            loadGithubMetrics();
+        }, { timeout: 3200 });
+    } else if (perfLevel === 1 && "requestIdleCallback" in window) {
+        window.requestIdleCallback(() => {
+            loadGithubMetrics();
+        }, { timeout: 2200 });
+    } else if (perfLevel > 0) {
+        setTimeout(() => {
+            loadGithubMetrics();
+        }, perfLevel >= 2 ? 1000 : 650);
+    } else {
+        loadGithubMetrics();
+    }
     createParticles();
 
     themeToggle?.addEventListener("click", () => {
@@ -161,7 +200,24 @@ document.addEventListener("DOMContentLoaded", () => {
         scrollProgress.style.width = `${Math.min(100, Math.max(0, ratio))}%`;
     };
 
-    window.addEventListener("scroll", updateScrollProgress, { passive: true });
+    let scrollTicking = false;
+    let lastScrollUpdateTime = 0;
+    const onScroll = () => {
+        if (scrollTicking) return;
+        scrollTicking = true;
+        requestAnimationFrame(() => {
+            const now = performance.now();
+            if (perfLevel >= 2 && now - lastScrollUpdateTime < 32) {
+                scrollTicking = false;
+                return;
+            }
+            updateScrollProgress();
+            lastScrollUpdateTime = now;
+            scrollTicking = false;
+        });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
     updateScrollProgress();
 
     if (!reduceMotion && !coarsePointer && cursorGlow) {
@@ -270,8 +326,44 @@ document.addEventListener("DOMContentLoaded", () => {
         setInterval(() => {
             quoteIndex = (quoteIndex + 1) % quotes.length;
             animateQuoteSwap(quotes[quoteIndex]);
-        }, 4200);
+        }, perfLevel >= 2 ? 6800 : (perfLevel === 1 ? 5200 : 4200));
     }
+
+    const monitorAndroidPerformance = () => {
+        if (!androidLowPerf || reduceMotion || perfLevel >= 2) return;
+        let lastTs = performance.now();
+        const startTs = lastTs;
+        let samples = 0;
+        let totalDelta = 0;
+        let jankFrames = 0;
+
+        const step = (now) => {
+            const delta = now - lastTs;
+            lastTs = now;
+
+            if (delta < 250) {
+                samples += 1;
+                totalDelta += delta;
+                if (delta > 26) jankFrames += 1;
+            }
+
+            if (now - startTs < 9000) {
+                requestAnimationFrame(step);
+                return;
+            }
+
+            const avgDelta = samples ? (totalDelta / samples) : 16.67;
+            const jankRatio = samples ? (jankFrames / samples) : 0;
+            if (avgDelta > 23 || jankRatio > 0.34) {
+                setPerfLevel(2);
+                createParticles();
+            }
+        };
+
+        requestAnimationFrame(step);
+    };
+
+    monitorAndroidPerformance();
 
     const konamiSequence = [
         "ArrowUp",
