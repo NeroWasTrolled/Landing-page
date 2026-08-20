@@ -4,212 +4,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabriel França | Links</title>
-    <link rel="icon" type="image/png" href="img/rose.png">
+    <title>Gabriel França | Link na bio</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="apple-touch-icon" href="img/user-perfil.png">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <script>
-        (function () {
-            var savedTheme = localStorage.getItem("bio-theme") || "dark";
-            document.body.setAttribute("data-theme", savedTheme);
-        })();
-    </script>
-
-    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
-    <div class="fx-particles" id="fx-particles" aria-hidden="true"></div>
-    <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
-
-    <div id="loading-screen" aria-hidden="true" data-theme="dark">
-        <div class="loader-brand">
-            <img src="img/rose.png" alt="Logo de Gabriel França">
-        </div>
-        <div class="loader-line">
+    <div id="loading-screen" aria-hidden="true">
+        <img src="img/rose.png" alt="" class="loader-rose">
+        <div class="loader-bar">
             <div class="loader-fill" id="loader-fill"></div>
         </div>
-        <p id="loader-text">Preparando experiência visual...</p>
+        <p class="loader-name">Gabriel França</p>
     </div>
 
-    <main class="page-shell">
-        <div class="shape shape-left" aria-hidden="true"></div>
-        <div class="shape shape-right" aria-hidden="true"></div>
+    <main>
+        <img src="img/rose.png" alt="" aria-hidden="true" class="bg-rose bg-rose-left">
+        <img src="img/rose.png" alt="" aria-hidden="true" class="bg-rose bg-rose-hero" id="hero-rose">
 
-        <section class="top-actions" data-reveal>
-            <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Alternar tema">
-                <i class="fa-solid fa-moon"></i>
-                <span>Escuro</span>
-            </button>
-            <p class="micro-copy">Link bio interativo para clientes, parcerias e projetos.</p>
-            <div class="brand-chip" aria-label="Identidade visual de Gabriel França">
-                <img src="img/rose.png" alt="Logo rose" class="brand-chip-logo">
-                <img src="img/user-perfil.png" alt="Foto de perfil de Gabriel França" class="brand-chip-avatar">
+        <section class="hero">
+            <p class="hero-eyebrow">Link na bio · Dev back-end</p>
+
+            <h1 class="hero-title">Gabriel<br>França</h1>
+
+            <div class="hero-divider"></div>
+
+            <p class="hero-subtitle">Aplicações, APIs e automações que tiram o trabalho manual da rotina. Back-end como base, com front que tem identidade.</p>
+
+            <div class="hero-status">
+                <img src="img/user-perfil.png" alt="Gabriel França" class="hero-avatar">
+                <div class="status-pill">
+                    <span class="dot"></span>Disponível para freelas
+                </div>
             </div>
         </section>
 
-        <section class="bio-card" data-reveal>
-            <header class="bio-top">
-                <img src="img/user-perfil.png" alt="Foto de perfil de Gabriel França" class="avatar" id="secret-avatar">
-                <div>
-                    <p class="tagline">Dev Back-End</p>
-                    <h1>Gabriel França</h1>
-                    <p class="subtitle">Focado em aplicações e automações. Back-end como base, com um toque visual forte
-                        no front.</p>
-                </div>
-            </header>
-
-            <div class="status-line">
-                <span class="dot"></span>
-                Disponível para freelas e parcerias
-            </div>
-
-            <div class="focus-pills" data-reveal>
-                <span>APIs e Integrações</span>
-                <span>Automações</span>
-                <span>Back-End Escalável</span>
-                <span>Front com Identidade</span>
-            </div>
-
-            <div class="social-row" data-reveal>
-                <div class="social-chip" aria-label="Instagram">
-                    <i class="fa-brands fa-instagram"></i>
-                    <span>@dutra_simoes</span>
-                </div>
-                <div class="social-chip" aria-label="TikTok">
-                    <i class="fa-brands fa-tiktok"></i>
-                    <span>@dutra_simoes</span>
-                </div>
-                <div class="social-chip" aria-label="GitHub">
-                    <i class="fa-brands fa-github"></i>
-                    <span>NeroWasTrolled</span>
-                </div>
-                <div class="social-chip" aria-label="LinkedIn">
-                    <i class="fa-brands fa-linkedin"></i>
-                    <span>gabriel-franca</span>
-                </div>
-            </div>
-
-            <div class="metric-row" data-reveal>
-                <article class="metric-card">
-                    <strong id="metric-projects" data-counter="0">0</strong>
-                    <span>projetos publicados</span>
-                </article>
-                <article class="metric-card">
-                    <strong id="metric-stacks" data-counter="0">0</strong>
-                    <span>stacks em uso</span>
-                </article>
-                <article class="metric-card">
-                    <strong id="metric-stars" data-counter="0">0</strong>
-                    <span>estrelas recebidas</span>
-                </article>
-            </div>
-        </section>
-
-        <section class="links-grid">
-            <a class="link-card" data-reveal href="https://portfolio-gabrielfranca.vercel.app" target="_blank"
-                rel="noopener noreferrer">
-                <div>
-                    <p class="label">Destaque</p>
-                    <h2>Portfólio oficial</h2>
-                    <p>Cases reais, visual forte e projetos com foco em resultado.</p>
-                </div>
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-
-            <a class="link-card" data-reveal href="https://github.com/NeroWasTrolled" target="_blank"
-                rel="noopener noreferrer">
-                <div>
-                    <p class="label">Código</p>
-                    <h2>GitHub</h2>
-                    <p>Repositórios, estudos e experimentos de desenvolvimento.</p>
-                </div>
-                <i class="fa-solid fa-code-branch"></i>
-            </a>
-
-            <a class="link-card" data-reveal href="https://www.linkedin.com/in/gabriel-frança-4633aa27b/"
-                target="_blank" rel="noopener noreferrer">
-                <div>
-                    <p class="label">Carreira</p>
-                    <h2>LinkedIn</h2>
-                    <p>Trajetória profissional, networking e atualizações.</p>
-                </div>
-                <i class="fa-solid fa-user-tie"></i>
-            </a>
-
-            <a class="link-card" data-reveal href="https://www.instagram.com/dutra_simoes/" target="_blank"
-                rel="noopener noreferrer">
-                <div>
-                    <p class="label">Contato</p>
-                    <h2>Instagram DM</h2>
-                    <p>Fale comigo por mensagem direta para projetos e parcerias.</p>
-                </div>
-                <i class="fa-solid fa-paper-plane"></i>
+        <section class="featured-wrap">
+            <a href="https://portfolio-gabrielfranca.vercel.app" target="_blank" rel="noopener noreferrer" class="featured-card">
+                <img src="img/rose.png" alt="" class="featured-rose">
+                <div class="featured-sweep"></div>
+                <p class="featured-label">Destaque · comece aqui</p>
+                <h2 class="featured-title">Portfólio oficial</h2>
+                <p class="featured-desc">Cases reais: painéis, automações e sistemas rodando em operação.</p>
+                <span class="featured-cta">Abrir portfólio <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
             </a>
         </section>
 
-        <section class="service-lab" id="servicos" data-reveal>
-            <p class="spot-title">Como eu entrego</p>
-            <div class="service-grid">
-                <article>
-                    <h3>Aplicações sob medida</h3>
-                    <p>Soluções web com lógica robusta, autenticação e integração com APIs.</p>
-                </article>
-                <article>
-                    <h3>Automações inteligentes</h3>
-                    <p>Fluxos que economizam tempo e reduzem tarefa manual no dia a dia.</p>
-                </article>
-                <article>
-                    <h3>Código limpo e prático</h3>
-                    <p>Arquitetura clara para evoluir com facilidade e manutenção simples.</p>
-                </article>
+        <section class="links-wrap">
+            <p class="section-label">Onde me encontrar</p>
+            <div class="links-list">
+                <a href="https://wa.me/5544997135259" target="_blank" rel="noopener noreferrer" class="link-row" style="animation-delay:0ms">
+                    <i class="fa-brands fa-whatsapp row-icon" aria-hidden="true"></i>
+                    <span class="row-body">
+                        <span class="row-title">WhatsApp direto</span>
+                        <span class="row-sub">Orçamento e briefing sem intermediário</span>
+                    </span>
+                    <i class="fa-solid fa-arrow-up-right-from-square row-arrow" aria-hidden="true"></i>
+                </a>
+
+                <a href="https://github.com/NeroWasTrolled" target="_blank" rel="noopener noreferrer" class="link-row" style="animation-delay:60ms">
+                    <i class="fa-brands fa-github row-icon" aria-hidden="true"></i>
+                    <span class="row-body">
+                        <span class="row-title">GitHub</span>
+                        <span class="row-sub">NeroWasTrolled · código e experimentos</span>
+                    </span>
+                    <i class="fa-solid fa-arrow-up-right-from-square row-arrow" aria-hidden="true"></i>
+                </a>
+
+                <a href="https://www.linkedin.com/in/gabriel-fran%C3%A7a-4633aa27b/" target="_blank" rel="noopener noreferrer" class="link-row" style="animation-delay:120ms">
+                    <i class="fa-brands fa-linkedin-in row-icon" aria-hidden="true"></i>
+                    <span class="row-body">
+                        <span class="row-title">LinkedIn</span>
+                        <span class="row-sub">Trajetória e networking</span>
+                    </span>
+                    <i class="fa-solid fa-arrow-up-right-from-square row-arrow" aria-hidden="true"></i>
+                </a>
+
+                <a href="https://www.instagram.com/dutra_simoes/" target="_blank" rel="noopener noreferrer" class="link-row" style="animation-delay:180ms">
+                    <i class="fa-brands fa-instagram row-icon" aria-hidden="true"></i>
+                    <span class="row-body">
+                        <span class="row-title">Instagram</span>
+                        <span class="row-sub">@dutra_simoes · chama na DM</span>
+                    </span>
+                    <i class="fa-solid fa-arrow-up-right-from-square row-arrow" aria-hidden="true"></i>
+                </a>
+
+                <a href="https://www.tiktok.com/@dutra_simoes" target="_blank" rel="noopener noreferrer" class="link-row" style="animation-delay:240ms">
+                    <i class="fa-brands fa-tiktok row-icon" aria-hidden="true"></i>
+                    <span class="row-body">
+                        <span class="row-title">TikTok</span>
+                        <span class="row-sub">@dutra_simoes · rotina de dev</span>
+                    </span>
+                    <i class="fa-solid fa-arrow-up-right-from-square row-arrow" aria-hidden="true"></i>
+                </a>
+
+                <a href="mailto:gabrielfrancasimoes@gmail.com" class="link-row" style="animation-delay:300ms">
+                    <i class="fa-solid fa-envelope row-icon" aria-hidden="true"></i>
+                    <span class="row-body">
+                        <span class="row-title">E-mail</span>
+                        <span class="row-sub">gabrielfrancasimoes@gmail.com</span>
+                    </span>
+                    <i class="fa-solid fa-arrow-right row-arrow" aria-hidden="true"></i>
+                </a>
             </div>
         </section>
 
-        <section class="spotlight" data-reveal>
-            <p class="spot-title">Agora mesmo</p>
-            <ul>
-                <li>Aprendendo: Machine Learning aplicado</li>
-                <li>Construindo: novas aplicações para portfólio</li>
-                <li>Foco: back-end, automações e performance</li>
-            </ul>
-            <blockquote id="rotating-quote" class="quote-animated">
-                <span id="quote-text">"Design bonito sem estratégia é só decoração."</span>
-                <span class="quote-cursor" aria-hidden="true">_</span>
-            </blockquote>
-        </section>
-
-        <section class="github-panel" data-reveal>
-            <p class="spot-title">GitHub em tempo real</p>
-            <p class="github-copy">Resumo automático do meu perfil e linguagens com atualização externa.</p>
-            <div class="github-grid">
-                <img id="github-stats-card"
-                    src="https://github-readme-stats.vercel.app/api?username=NeroWasTrolled&show_icons=true&theme=dark"
-                    alt="Estatísticas do GitHub de Gabriel França" loading="lazy">
-                <img id="github-langs-card"
-                    src="https://github-readme-stats.vercel.app/api/top-langs/?username=NeroWasTrolled&layout=compact&theme=dark"
-                    alt="Linguagens mais usadas no GitHub de Gabriel França" loading="lazy">
+        <section class="focus-wrap">
+            <p class="section-label">Foco</p>
+            <div class="focus-tags">
+                <span class="focus-tag" style="animation-delay:20ms">APIs e integrações</span>
+                <span class="focus-tag" style="animation-delay:90ms">Automações</span>
+                <span class="focus-tag" style="animation-delay:160ms">Back-end escalável</span>
+                <span class="focus-tag" style="animation-delay:230ms">Front com identidade</span>
             </div>
         </section>
 
-        <footer class="mini-footer" data-reveal>
-            <p>Acessos totais: <strong id="visitor-count">...</strong></p>
-            <div class="footer-brand">
-                <img src="img/rose.png" alt="Logo rose de Gabriel França">
-                <p>Feito por Gabriel França</p>
+        <section class="quote-wrap">
+            <img src="img/rose.png" alt="" class="quote-rose">
+            <span aria-hidden="true" class="quote-mark">&ldquo;</span>
+            <p class="quote-text" id="quote-text"><span class="quote-caret"></span></p>
+            <div class="quote-foot">
+                <span class="line"></span>
+                <span class="label">como eu trabalho</span>
             </div>
+        </section>
+
+        <footer class="page-footer">
+            <img src="img/rose.png" alt="" class="footer-rose">
+            <div class="footer-info">
+                <p class="name">Gabriel França</p>
+                <p class="tag">Painéis · automações · sistemas</p>
+            </div>
+            <a href="https://portfolio-gabrielfranca.vercel.app" target="_blank" rel="noopener noreferrer" class="footer-link">portfólio ↗</a>
         </footer>
     </main>
-
-    <div id="easter-egg" class="easter-egg" aria-hidden="true">
-        <div class="egg-box">
-            <p class="egg-title">Modo Secreto Liberado</p>
-            <p id="egg-message">Automação mode: ON</p>
-            <p class="egg-tip" id="egg-tip">"Quem automatiza bem, escala melhor."</p>
-            <button id="close-egg" type="button">Fechar</button>
-        </div>
-    </div>
 
     <script src="js/animationLoading.js"></script>
     <script src="js/main.js"></script>
